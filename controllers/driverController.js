@@ -17,25 +17,11 @@ const registerUser = async function (req, res) {
     }
 
     // Extract params
-    const { title, name, phone, email, password, address } = requestBody;
+    const { name, phone, email, password, address, dlno, dl_expiry, riderId, docId, cabId, gender} = requestBody;
 
     // Validation starts
-    if (!validator.isValid(title)) {
-      res.status(400).send({ status: false, message: "Title is required" });
-      return;
-    }
+    
 
-    if (!validator.isValidTitle(title)) {
-      res
-        .status(400)
-        .send({
-          status: false,
-          message: `Title should be among ${systemConfig.titleEnumArray.join(
-            ", "
-          )}`,
-        });
-      return;
-    }
 
     if (!validator.isValid(name)) {
       res.status(400).send({ status: false, message: "Name is required" });
@@ -111,9 +97,45 @@ const registerUser = async function (req, res) {
       return;
     }
 
+    if (!validator.isValid(address)) {
+      res.status(400).send({ status: false, message: "Address is required" });
+      return;
+    }
+
+    if (!validator.isValid(dlno)) {
+      res.status(400).send({ status: false, message: "DlNo. is required" });
+      return;
+    }
+
+    if (!validator.isValid(dl_expiry)) {
+      res.status(400).send({ status: false, message: "dl_expiry is required" });
+      return;
+    }
+
+    if (!validator.isValid(riderId)) {
+      res.status(400).send({ status: false, message: "riderId is required" });
+      return;
+    }
+
+    if (!validator.isValid(docId)) {
+      res.status(400).send({ status: false, message: "docId is required" });
+      return;
+    }
+
+    if (!validator.isValid(cabId)) {
+      res.status(400).send({ status: false, message: "cabId is required" });
+      return;
+    }
+
+    if (!validator.isValid(gender)) {
+      res.status(400).send({ status: false, message: "Enter Your Gender" });
+      return;
+    }
+
+
     // Validation ends
 
-    const userData = { title, name, phone, email, password, address };
+    const userData = {name, phone, email, password, address, dlno, dl_expiry, riderId, docId, cabId, gender };
     const newUser = await userModel.create(userData);
 
     res.status(201).send({ status: true, message: "Success", data: newUser });

@@ -5,7 +5,7 @@ require('./src/models/DBconnection')
 const express = require("express");
 var bodyParser = require('body-parser');
 
-const route = require('./src/routes/route.js');
+const route = require('./src/routes/routes.js');
 
 const path = require("path")
 const app = express();
